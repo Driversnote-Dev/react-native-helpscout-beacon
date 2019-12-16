@@ -15,6 +15,7 @@ import com.helpscout.beacon.model.SuggestedArticle;
 
 public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
     private final ReactApplicationContext reactContext;
+    private Beacon beacon;
 
     public HelpscoutBeaconModule(ReactApplicationContext reactContext) {
         super(reactContext);
@@ -27,8 +28,18 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void init(String beaconID) {
+        if (TextUtils.isEmpty(beaconID)) {
+            return;
+        }
+        beacon = new Beacon.Builder()
+            .withBeaconId(beaconID)
+            .build();
+    }
+
+    @ReactMethod
     public void login(String email, String name, String userID) {
-        if (TextUtils.isEmpty(email) || TextUtils.isEmpty(name)) {
+        if (beacon == null || TextUtils.isEmpty(email) || TextUtils.isEmpty(name)) {
             return;
         }
         Beacon.login(email, name);
@@ -37,11 +48,17 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void open(String signature) {
+        if (beacon == null || TextUtils.isEmpty(signature)) {
+            return;
+        }
         BeaconActivity.openInSecureMode(this.reactContext, signature);
     }
 
     @ReactMethod
     public void loginAndOpen(String email, String name, String userID, String signature) {
+        if (beacon == null || TextUtils.isEmpty(signature)) {
+            return;
+        }
         login(email, name, userID);
         open(signature);
     }
@@ -53,6 +70,9 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void openArticle(String articleID, String signature) {
+        if (beacon == null || TextUtils.isEmpty(articleID) || TextUtils.isEmpty(signature)) {
+            return;
+        }
         BeaconActivity.openInSecureMode(this.reactContext, signature, BeaconScreens.ARTICLE_SCREEN, new ArrayList<>(Arrays.asList(articleID)));
     }
 
