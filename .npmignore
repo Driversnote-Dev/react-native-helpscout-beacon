@@ -1,0 +1,10 @@
+build/
+android/build/
+android/BUCK
+android/src/main/res/
+*.iml
+
+yarn.lock
+node_modules/
+
+.idea
