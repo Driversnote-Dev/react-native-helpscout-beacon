@@ -6,6 +6,8 @@ import android.util.Log;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableType;
 import com.facebook.react.bridge.Callback;
 
 import java.util.*;
@@ -147,23 +149,35 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void suggestArticles(String[] articleIDList) {
-        if (beacon == null || articleIDList == null) {
+    public void suggestArticles(ReadableArray articleIds) {
+        if (beacon == null || articleIds == null) {
             if (beacon == null) {
                 Log.w(TAG, "[suggestArticles] Not initialized - did you forget to call 'init'?");
             }
-            if (articleIDList == null) {
-                Log.w(TAG, "[suggestArticles] Missing argument: articleIDList");
+            if (articleIds == null) {
+                Log.w(TAG, "[suggestArticles] Missing argument: articleIds");
             }
             return;
         }
-        if (articleIDList != null && articleIDList.length == 0) {
-            Log.w(TAG, "[suggestArticles] Don't pass an empty articleIDList");
+        if (articleIds != null && articleIds.size() == 0) {
+            Log.w(TAG, "[suggestArticles] Don't pass an empty articleIds");
+            return;
+        }
+        if (articleIds != null && articleIds.size() >= 0 && articleIds.getType(0) != ReadableType.String) {
+            Log.w(TAG, "[suggestArticles] Argument 'articleIds' must contain String values");
             return;
         }
 
         // There is a limit of 5 article ids. If the list is larger than 5 the additional articles will be ignored.
-        List<SuggestedArticle> suggestedArticles = new ArrayList(Arrays.asList(articleIDList));
+        List<SuggestedArticle> suggestedArticles = new ArrayList();
+
+        for (int j = 0; j < articleIds.size(); j++) {
+            if (!articleIds.isNull(j) && articleIds.getType(j) == ReadableType.String) {
+                String id = articleIds.getString(j);
+                suggestedArticles.add(new SuggestedArticle.SuggestedArticleWithId(id));
+            }
+        }
+
         Beacon.setOverrideSuggestedArticlesOrLinks(suggestedArticles);
     }
 
