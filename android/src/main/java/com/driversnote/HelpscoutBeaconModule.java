@@ -41,62 +41,40 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void login(String email, String name, String userID) {
-        if (beacon == null || TextUtils.isEmpty(email) || TextUtils.isEmpty(name) || TextUtils.isEmpty(userID)) {
+    public void identify(String email) {
+        if (beacon == null || TextUtils.isEmpty(email)) {
             if (beacon == null) {
                 Log.w(TAG, "[login] Not initialized - did you forget to call 'init'?");
             }
             if (TextUtils.isEmpty(email)) {
                 Log.w(TAG, "[login] Missing argument: email");
             }
-            if (TextUtils.isEmpty(name)) {
-                Log.w(TAG, "[login] Missing argument: name");
-            }
-            if (TextUtils.isEmpty(userID)) {
-                Log.w(TAG, "[login] Missing argument: userID");
-            }
             return;
         }
-        Beacon.login(email, name);
-        Beacon.addAttributeWithKey("userId", userID);
+        Beacon.identify(email);
     }
 
+    /**
+     * Use email and name field to identify
+     *
+     * @param email
+     * @param name
+     */
     @ReactMethod
-    public void open(String signature) {
-        if (beacon == null || TextUtils.isEmpty(signature)) {
+    public void identifyWithEmailAndName(String email, String name) {
+        if (beacon == null || TextUtils.isEmpty(email) || TextUtils.isEmpty(name)) {
             if (beacon == null) {
-                Log.w(TAG, "[open] Not initialized - did you forget to call 'init'?");
-            }
-            if (TextUtils.isEmpty(signature)) {
-                Log.w(TAG, "[open] Missing argument: signature");
-            }
-            return;
-        }
-        BeaconActivity.openInSecureMode(this.reactContext, signature);
-    }
-
-    @ReactMethod
-    public void loginAndOpen(String email, String name, String userID, String signature) {
-        if (beacon == null || TextUtils.isEmpty(email) || TextUtils.isEmpty(name) || TextUtils.isEmpty(userID) || TextUtils.isEmpty(signature)) {
-            if (beacon == null) {
-                Log.w(TAG, "[loginAndOpen] Not initialized - did you forget to call 'init'?");
+                Log.w(TAG, "[loginWithEmailAndName] Not initialized - did you forget to call 'init'?");
             }
             if (TextUtils.isEmpty(email)) {
-                Log.w(TAG, "[loginAndOpen] Missing argument: email");
+                Log.w(TAG, "[loginWithEmailAndName] Missing argument: email");
             }
             if (TextUtils.isEmpty(name)) {
-                Log.w(TAG, "[loginAndOpen] Missing argument: name");
-            }
-            if (TextUtils.isEmpty(userID)) {
-                Log.w(TAG, "[loginAndOpen] Missing argument: userID");
-            }
-            if (TextUtils.isEmpty(signature)) {
-                Log.w(TAG, "[loginAndOpen] Missing argument: signature");
+                Log.w(TAG, "[loginWithEmailAndName] Missing argument: name");
             }
             return;
         }
-        login(email, name, userID);
-        open(signature);
+        Beacon.identify(email, name);
     }
 
     @ReactMethod
@@ -106,6 +84,44 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
             return;
         }
         Beacon.logout();
+    }
+
+    /**
+     * Used to add an user attribute represented as a key / value pair.
+     * There is a limit of 30 attributes per user.
+     *
+     * @param key String Maximum size is 80 characters
+     * @param value String Maximum size is 200 characters
+     */
+    @ReactMethod
+    public void addAttributeWithKey(String key, String value) {
+        if (beacon == null || TextUtils.isEmpty(key) || TextUtils.isEmpty(value)) {
+            if (beacon == null) {
+                Log.w(TAG, "[addAttributeWithKey] Not initialized - did you forget to call 'init'?");
+            }
+            if (TextUtils.isEmpty(key)) {
+                Log.w(TAG, "[addAttributeWithKey] Missing argument: key");
+            }
+            if (TextUtils.isEmpty(value)) {
+                Log.w(TAG, "[addAttributeWithKey] Missing argument: value");
+            }
+            return;
+        }
+        Beacon.addAttributeWithKey(key, value);
+    }
+
+    @ReactMethod
+    public void open(String signature) {
+        if (beacon == null) {
+            Log.w(TAG, "[open] Not initialized - did you forget to call 'init'?");
+            return;
+        }
+
+        if (TextUtils.isEmpty(signature)) {
+            BeaconActivity.open(this.reactContext);
+        } else {
+            BeaconActivity.openInSecureMode(this.reactContext, signature);
+        }
     }
 
     @ReactMethod
@@ -122,7 +138,12 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
             }
             return;
         }
-        BeaconActivity.openInSecureMode(this.reactContext, signature, BeaconScreens.ARTICLE_SCREEN, new ArrayList<>(Arrays.asList(articleID)));
+
+        if (TextUtils.isEmpty(signature)) {
+            BeaconActivity.open(this.reactContext, BeaconScreens.ARTICLE_SCREEN, new ArrayList<>(Arrays.asList(articleID)));
+        } else {
+            BeaconActivity.openInSecureMode(this.reactContext, signature, BeaconScreens.ARTICLE_SCREEN, new ArrayList<>(Arrays.asList(articleID)));
+        }
     }
 
     @ReactMethod
