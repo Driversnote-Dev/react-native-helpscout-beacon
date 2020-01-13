@@ -17,6 +17,7 @@ RCT_EXPORT_MODULE();
 }
 
 NSString *helpscoutBeaconID;
+HSBeaconUser *beaconUser;
 
 RCT_EXPORT_METHOD(init:(NSString *)beaconID)
 {
@@ -28,94 +29,98 @@ RCT_EXPORT_METHOD(init:(NSString *)beaconID)
     helpscoutBeaconID = beaconID;
 }
 
-RCT_EXPORT_METHOD(open:(NSString *)signatureKey)
+RCT_EXPORT_METHOD(identify:(NSString *)email nameParameter:(NSString *)name)
 {
-    if (helpscoutBeaconID == nil || signatureKey == nil) {
+    if (helpscoutBeaconID == nil || email == nil) {
         if (helpscoutBeaconID == nil) {
-            NSLog(@"[open] Not initialized - did you forget to call 'init'?");
-        }
-        if (signatureKey == nil) {
-            NSLog(@"[open] missing parameter: signatureKey");
-        }
-        return;
-    }
-
-    HSBeaconSettings *settings = [[HSBeaconSettings alloc] initWithBeaconId:helpscoutBeaconID];
-    [HSBeacon openBeacon:settings signature:signatureKey];
-}
-
-RCT_EXPORT_METHOD(login:(NSString *)email nameParameter:(NSString *)name userIdParameter:(NSString *)userID)
-{
-    if (helpscoutBeaconID == nil || email == nil || name == nil || userID == nil) {
-        if (helpscoutBeaconID == nil) {
-            NSLog(@"[login] Not initialized - did you forget to call 'init'?");
+            NSLog(@"[identify] Not initialized - did you forget to call 'init'?");
         }
         if (email == nil) {
-            NSLog(@"[login] missing parameter: email");
-        }
-        if (name == nil) {
-            NSLog(@"[login] missing parameter: name");
-        }
-        if (userID == nil) {
-            NSLog(@"[login] missing parameter: userID");
+            NSLog(@"[identify] missing parameter: email");
         }
         return;
     }
 
     HSBeaconUser *user = [[HSBeaconUser alloc] init];
     user.email = email;
-    user.name = name;
+    if (name != nil) {
+        user.name = name;
+    }
+
+    // Store beaconUser locally
+    beaconUser = user;
     [HSBeacon login:user];
-    [user addAttributeWithKey:@"userId" value:userID];
 }
 
-RCT_EXPORT_METHOD(loginAndOpen:(NSString *)email nameParameter:(NSString *)name userIdParameter:(NSString *)userID signatureParameter:(NSString *)signature)
+RCT_EXPORT_METHOD(addAttributeWithKey:(NSString *)key valueParameter:(NSString *)value)
 {
-    if (helpscoutBeaconID == nil || email == nil || name == nil || userID == nil) {
+    if (helpscoutBeaconID == nil || beaconUser == nil || key == nil || value == nil) {
         if (helpscoutBeaconID == nil) {
-            NSLog(@"[loginAndOpen] Not initialized - did you forget to call 'init'?");
+            NSLog(@"[addAttributeWithKey] Not initialized - did you forget to call 'init'?");
         }
-        if (email == nil) {
-            NSLog(@"[loginAndOpen] missing parameter: email");
+        if (beaconUser == nil) {
+            NSLog(@"[addAttributeWithKey] Not initialized - did you forget to call 'identify' or 'login'?");
         }
-        if (name == nil) {
-            NSLog(@"[loginAndOpen] missing parameter: name");
+        if (key == nil) {
+            NSLog(@"[addAttributeWithKey] missing parameter: key");
         }
-        if (userID == nil) {
-            NSLog(@"[loginAndOpen] missing parameter: userID");
-        }
-        if (signature == nil) {
-            NSLog(@"[loginAndOpen] missing parameter: signature");
+        if (value == nil) {
+            NSLog(@"[addAttributeWithKey] missing parameter: value");
         }
         return;
     }
 
-    [self login:email nameParameter:name userIdParameter:userID];
-    [self open:signature];
+    [beaconUser addAttributeWithKey:key value:value];
+}
+
+RCT_EXPORT_METHOD(open:(NSString *)signatureKey)
+{
+    if (helpscoutBeaconID == nil || beaconUser == nil) {
+        if (helpscoutBeaconID == nil) {
+            NSLog(@"[open] Not initialized - did you forget to call 'init'?");
+        }
+        if (beaconUser == nil) {
+            NSLog(@"[open] Not initialized - did you forget to call 'identify' or 'login'?");
+        }
+        return;
+    }
+
+    HSBeaconSettings *settings = [[HSBeaconSettings alloc] initWithBeaconId:helpscoutBeaconID];
+    if (signatureKey == nil) {
+        [HSBeacon openBeacon:settings];
+    } else {
+        [HSBeacon openBeacon:settings signature:signatureKey];
+    }
 }
 
 RCT_EXPORT_METHOD(logout)
 {
+    if (helpscoutBeaconID == nil) {
+        NSLog(@"[logout] Not initialized - did you forget to call 'init'?");
+        return;
+    }
+
     [HSBeacon logout];
 }
 
 RCT_EXPORT_METHOD(openArticle:(NSString *)articleID signatureParameter:(NSString *)signature)
 {
-    if (helpscoutBeaconID == nil || articleID == nil || signature == nil) {
+    if (helpscoutBeaconID == nil || articleID == nil) {
         if (helpscoutBeaconID == nil) {
             NSLog(@"[openArticle] Not initialized - did you forget to call 'init'?");
         }
         if (articleID == nil) {
             NSLog(@"[openArticle] missing parameter: articleID");
         }
-        if (signature == nil) {
-            NSLog(@"[openArticle] missing parameter: signature");
-        }
         return;
     }
 
     HSBeaconSettings *settings = [[HSBeaconSettings alloc] initWithBeaconId:helpscoutBeaconID];
-    [HSBeacon openArticle:articleID beaconSettings: settings signature:signature];
+    if (signature == nil) {
+        [HSBeacon openArticle:articleID beaconSettings:settings];
+    } else {
+        [HSBeacon openArticle:articleID beaconSettings:settings signature:signature];
+    }
 }
 
 RCT_EXPORT_METHOD(suggestArticles:(NSArray *)articleIDList)
@@ -135,6 +140,11 @@ RCT_EXPORT_METHOD(suggestArticles:(NSArray *)articleIDList)
 
 RCT_EXPORT_METHOD(resetSuggestions)
 {
+    if (helpscoutBeaconID == nil) {
+        NSLog(@"[resetSuggestions] Not initialized - did you forget to call 'init'?");
+        return;
+    }
+
     NSMutableArray *emptyArray = [NSMutableArray new];
     [HSBeacon suggest:emptyArray];
 }
