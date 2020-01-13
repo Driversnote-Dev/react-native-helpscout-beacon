@@ -108,7 +108,7 @@ HelpscoutBeacon.openArticle('some_article_id', 'my_signature');
 
 #### `suggestArticles`
 
-The suggestArticles method allows you to change the default list of suggested articles. Article IDs can be found in Help Scout by navigating to the article and copying the article ID from the URL. The URL is structured like this: https://secure.helpscout.net/docs/[COLLECTION ID]/article/[ARTICLE ID]/.
+The suggestArticles method allows you to change the default list of suggested articles. Article IDs can be found in Help Scout by navigating to the article and copying the article ID from the URL. The URL is structured like this: `https://secure.helpscout.net/docs/[COLLECTION ID]/article/[ARTICLE ID]/`.
 Custom suggestions will only get loaded when the Beacon is opened. If the Beacon is not present, loading the custom suggestion data will get queued up for the next Beacon display.
 
 **Notes**:
@@ -127,7 +127,7 @@ Reset any suggested articles set by `suggestArticles` back to Helpscouts own def
 
 ```javascript
 HelpscoutBeacon.openArticle('some_article_id', 'my_signature');
-
+```
 
 ### Additional convenience methods
 
