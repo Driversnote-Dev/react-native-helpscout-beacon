@@ -9,8 +9,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/DriversnoteDev/react-native-helpscout-beacon.git",
-    "baseUrl": "https://github.com/DriversnoteDev/react-native-helpscout-beacon"
+    "url": "git+https://github.com/Driversnote-Dev/react-native-helpscout-beacon.git",
+    "baseUrl": "https://github.com/Driversnote-Dev/react-native-helpscout-beacon"
   },
   "keywords": [
     "react-native"
