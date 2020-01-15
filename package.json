@@ -1,7 +1,7 @@
 {
   "name": "react-native-helpscout-beacon",
   "title": "React Native Helpscout Beacon",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Integrate Helpscout Beacon in to your React Native app",
   "main": "index.js",
   "scripts": {
