@@ -69,6 +69,14 @@ Initialize the Helpscout beacon library - has to be called before any other Help
 HelpscoutBeacon.init('my_helpscout_id');
 ```
 
+#### `identify`
+
+Identify a helpscout user with `email` (and optional `name`)
+
+```javascript
+HelpscoutBeacon.identify('email@address.com', 'John Smith');
+```
+
 #### `logout`
 
 Logout user from the Helpscout Beacon.
