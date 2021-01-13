@@ -62,14 +62,27 @@ const loginAndOpen = (email, name, userId, signature = null) => {
   }
 };
 
+/**
+ * Display the Beacon user interface.
+ *
+ * @param {String} signature
+ */
+const open = (signature = null) => {
+  if (signature === null) {
+    HelpscoutBeacon.open(null);
+  } else {
+    HelpscoutBeacon.open(signature);
+  }
+}
+
 const HSBeacon = {
   init: HelpscoutBeacon.init,
   identify,
   login,
   loginAndOpen,
+  open,
   logout: HelpscoutBeacon.logout,
   addAttributeWithKey: HelpscoutBeacon.addAttributeWithKey,
-  open: HelpscoutBeacon.open,
   openArticle: HelpscoutBeacon.openArticle,
   suggestArticles: HelpscoutBeacon.suggestArticles,
   resetSuggestions: HelpscoutBeacon.resetSuggestions
