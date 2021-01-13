@@ -8,7 +8,7 @@ Integrate the [Helpscout](https://www.helpscout.com/) Beacon into your React Nat
 
 * [**iOS** SDK](https://developer.helpscout.com/beacon-2/ios/)
 
-    Tested version: `1.0.3`
+    Tested version: [1.0.3](https://github.com/helpscout/beacon-ios-sdk/blob/master/CHANGELOG.md#103-release-january-8-2020) (released 2020-01-08)
 
 This library is compatible with and supported for React Native `v0.60+`.
 
