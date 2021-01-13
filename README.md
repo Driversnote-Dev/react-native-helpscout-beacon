@@ -4,7 +4,7 @@ Integrate the [Helpscout](https://www.helpscout.com/) Beacon into your React Nat
 
 * [**Android** SDK](https://developer.helpscout.com/beacon-2/android/)
 
-    Current version: `2.0.1`
+    Current version: [2.3.1](https://github.com/helpscout/beacon-android-sdk-sample/blob/master/CHANGELOG.md#version-231-2020-12-21) (released 2020-12-21)
 
 * [**iOS** SDK](https://developer.helpscout.com/beacon-2/ios/)
 
