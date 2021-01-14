@@ -33,13 +33,14 @@ Can be updated in your main project directory by running
 cd ios/ && pod update Beacon
 ```
 
+Please create an issue in this repo in case it doesn't work as expected.
+
 ### Android
 
-Has to be updated in this module's `android/build.gradle`, i.e. the lines
+Has to be updated in this module's `android/build.gradle`, i.e. the version in the following line has to be adapted
 
 ```java
-implementation "com.helpscout:beacon-core:2.0.1"
-implementation "com.helpscout:beacon-ui:2.0.1"
+implementation "com.helpscout:beacon-ui:2.3.1"
 ```
 
 ## Usage example
