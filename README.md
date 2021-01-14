@@ -1,5 +1,7 @@
 # react-native-helpscout-beacon
 
+[![npm version](https://badge.fury.io/js/react-native-helpscout-beacon.svg)](https://badge.fury.io/js/react-native-helpscout-beacon)
+
 Integrate the [Helpscout](https://www.helpscout.com/) Beacon into your React Native app.
 
 * [**Android** SDK](https://developer.helpscout.com/beacon-2/android/)
