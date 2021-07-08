@@ -93,6 +93,22 @@ RCT_EXPORT_METHOD(open:(NSString *)signatureKey)
     }
 }
 
+RCT_EXPORT_METHOD(navigate:(NSString *)path)
+{
+    if (helpscoutBeaconID == nil || path == nil) {
+        if (helpscoutBeaconID == nil) {
+            NSLog(@"[navigate] Not initialized - did you forget to call 'init'?");
+        }
+        if (path == nil) {
+            NSLog(@"[navigate] missing parameter: path");
+        }
+        return;
+    }
+
+    HSBeaconSettings *settings = [[HSBeaconSettings alloc] initWithBeaconId:helpscoutBeaconID];
+    [HSBeacon navigate:path beaconSettings:settings];
+}
+
 RCT_EXPORT_METHOD(logout)
 {
     if (helpscoutBeaconID == nil) {

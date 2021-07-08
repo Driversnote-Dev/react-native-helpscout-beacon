@@ -149,6 +149,28 @@ public class HelpscoutBeaconModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void navigate(String path) {
+        if (beacon == null) {
+            Log.w(TAG, "[navigate] Not initialized - did you forget to call 'init'?");
+            return;
+        }
+        switch (path) {
+            case "/ask/message/":
+                BeaconActivity.open(this.reactContext, BeaconScreens.CONTACT_FORM_SCREEN, new ArrayList<String>());
+                break;
+            case "/ask/chat/":
+                BeaconActivity.open(this.reactContext, BeaconScreens.CHAT, new ArrayList<String>());
+                break;
+            case "/answers/":
+                BeaconActivity.open(this.reactContext, BeaconScreens.PREVIOUS_MESSAGES, new ArrayList<String>());
+                break;
+            default:
+                Log.w(TAG, "[navigate] Path '" + (path != null ? path : "null") + "' not supported");
+                break;
+        }
+    }
+
+    @ReactMethod
     public void suggestArticles(ReadableArray articleIds) {
         if (beacon == null || articleIds == null) {
             if (beacon == null) {
