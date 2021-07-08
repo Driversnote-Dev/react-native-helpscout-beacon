@@ -6,6 +6,12 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
+## [v0.4.0] - 2021-07-08
+
+### Added
+
+- Added `navigate` API method, by [@martinpoulsen](https://github.com/martinpoulsen) (see [#8](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/8))
+
 ## [v0.3.0] - 2021-01-14
 
 ### Added
@@ -17,5 +23,6 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 - _Android_: Upgrade HelpScout Beacon SDK to version 2.3.1, by [@andrekovac](https://github.com/andrekovac)  (see [#6](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/6))
 
 
-[unreleased]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.3.0...master
+[unreleased]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.4.0...master
+[v0.4.0]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.2.2...v0.3.0
