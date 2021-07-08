@@ -137,7 +137,21 @@ HelpscoutBeacon.suggestArticles(articleIDList);
 Reset any suggested articles set by `suggestArticles` back to Helpscouts own default suggestions.
 
 ```javascript
-HelpscoutBeacon.openArticle('some_article_id', 'my_signature');
+HelpscoutBeacon.resetSuggestions();
+```
+
+#### `navigate`
+
+Display a specific page in the Helpscout beacon. On Android, these paths are supported:
+
+- "/ask/message/"
+- "/ask/chat/"
+- "/answers/"
+
+iOS supports additional paths e.g. "/" which displays the initial state of the beacon. Find supported path values [here](https://developer.helpscout.com/beacon-2/ios/#navigate-to-a-specific-screen).
+
+```javascript
+HelpscoutBeacon.navigate('/ask/message');
 ```
 
 ### Additional convenience methods

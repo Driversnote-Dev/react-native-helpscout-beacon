@@ -36,7 +36,7 @@ const identify = (email, name = null) => {
 const login = (email, name, userId) => {
   if (!email || !name || !userId) {
     console.error(
-      `[login] Missing parameter. Either 'email', 'name', 'userId' or several of them are missing.`
+      "[login] Missing parameter. Either 'email', 'name', 'userId' or several of them are missing."
     );
     return;
   }
@@ -75,12 +75,36 @@ const open = (signature = null) => {
   }
 }
 
+/**
+ * Display a specific page in the Helpscout beacon. On Android, these paths
+ * are supported:
+ * - "/ask/message/"
+ * - "/ask/chat/"
+ * - "/answers/"
+ * 
+ * iOS supports additional paths e.g. "/" which displays the initial state
+ * of the beacon. Find supported path values here:
+ * - https://developer.helpscout.com/beacon-2/ios/#navigate-to-a-specific-screen
+ * 
+ * @param {String} path
+ */
+const navigate = (path) => {
+  if (!path) {
+    console.error(
+      "[navigate] Missing parameter: path"
+    );
+    return;
+  }
+  HelpscoutBeacon.navigate(path);
+}
+
 const HSBeacon = {
   init: HelpscoutBeacon.init,
   identify,
   login,
   loginAndOpen,
   open,
+  navigate,
   logout: HelpscoutBeacon.logout,
   addAttributeWithKey: HelpscoutBeacon.addAttributeWithKey,
   openArticle: HelpscoutBeacon.openArticle,
