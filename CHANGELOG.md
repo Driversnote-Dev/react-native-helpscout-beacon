@@ -10,6 +10,10 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 - Removed the use of jcenter for Android
 
+### Changed
+
+- Android native SDK is updated to v. 4.1.0
+
 ### Added
 
 - Typescript support
