@@ -4,13 +4,13 @@
 
 Integrate the [Helpscout](https://www.helpscout.com/) Beacon into your React Native app.
 
-* [**Android** SDK](https://developer.helpscout.com/beacon-2/android/)
+- [**Android** SDK](https://developer.helpscout.com/beacon-2/android/)
 
-    Current version: [2.3.1](https://github.com/helpscout/beacon-android-sdk-sample/blob/master/CHANGELOG.md#version-231-2020-12-21) (released 2020-12-21)
+  Current version: [4.1.0](https://github.com/helpscout/beacon-android-sdk-sample/blob/main/CHANGELOG.md#version-410-2022-09-22) (released 2022-09-22)
 
-* [**iOS** SDK](https://developer.helpscout.com/beacon-2/ios/)
+- [**iOS** SDK](https://developer.helpscout.com/beacon-2/ios/)
 
-    Tested version: [2.0.2](https://github.com/helpscout/beacon-ios-sdk/blob/master/CHANGELOG.md#202-september-16-2020) (released 2020-09-16)
+  Tested version: [2.0.2](https://github.com/helpscout/beacon-ios-sdk/blob/master/CHANGELOG.md#202-september-16-2020) (released 2020-09-16)
 
 This library is compatible with and supported for React Native `v0.60+`.
 
@@ -40,7 +40,7 @@ Please create an issue in this repo in case it doesn't work as expected.
 Has to be updated in this module's `android/build.gradle`, i.e. the version in the following line has to be adapted
 
 ```java
-implementation "com.helpscout:beacon-ui:2.3.1"
+implementation "com.helpscout:beacon:4.1.0"
 ```
 
 ## Usage example
@@ -51,7 +51,11 @@ import HelpscoutBeacon from 'react-native-helpscout-beacon';
 // init has to be called first
 HelpscoutBeacon.init('my_helpscout_id');
 // Login into your helpscout account
-HelpscoutBeacon.login('email@address.com', 'John Smith', 'user_id_of_john_smith');
+HelpscoutBeacon.login(
+  'email@address.com',
+  'John Smith',
+  'user_id_of_john_smith'
+);
 // Open the helpscout beacon (using a cryptographic signature)
 HelpscoutBeacon.open('mySignature');
 ```
@@ -124,8 +128,8 @@ Custom suggestions will only get loaded when the Beacon is opened. If the Beacon
 
 **Notes**:
 
-* There is a limit of 5 article IDs. If the list is larger than 5 the additional articles will be ignored.
-* The Helpscout docs integration has to be enabled for this method to work.
+- There is a limit of 5 article IDs. If the list is larger than 5 the additional articles will be ignored.
+- The Helpscout docs integration has to be enabled for this method to work.
 
 ```javascript
 const articleIDList = ['id1', 'id2', 'id3'];
@@ -163,7 +167,11 @@ These methods are not part of the original SDKs but have proven to be useful.
 Convenience method to identify the user via setting an attribute with key `userId`.
 
 ```javascript
-HelpscoutBeacon.login('email@address.com', 'John Smith', 'user_id_of_john_smith');
+HelpscoutBeacon.login(
+  'email@address.com',
+  'John Smith',
+  'user_id_of_john_smith'
+);
 ```
 
 It is equivalent to
@@ -178,5 +186,10 @@ HelpscoutBeacon.addAttributeWithKey('userId', 'user_id_of_john_smith');
 Convenience method to login via setting an attribute with key `userId` and opening the Helpscout beacon (with optional signature).
 
 ```javascript
-HelpscoutBeacon.loginAndOpen('email@address.com', 'John Smith', 'user_id_of_john_smith', 'mySignature');
+HelpscoutBeacon.loginAndOpen(
+  'email@address.com',
+  'John Smith',
+  'user_id_of_john_smith',
+  'mySignature'
+);
 ```
