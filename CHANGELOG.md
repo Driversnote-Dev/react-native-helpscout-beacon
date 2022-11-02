@@ -6,6 +6,18 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
+### Fixed
+
+- Removed the use of jcenter for Android
+
+### Changed
+
+- Android native SDK is updated to v. 4.1.0
+
+### Added
+
+- Typescript support
+
 ## [v0.4.0] - 2021-07-08
 
 ### Added
@@ -16,12 +28,11 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ### Added
 
-- Allow `HelpscoutBeacon.open` to be called in basic mode (non [secure mode](https://developer.helpscout.com/beacon-2/web/secure-mode/)), i.e. without encrypted `signature`, by [@andrekovac](https://github.com/andrekovac)  (see [#6](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/6))
+- Allow `HelpscoutBeacon.open` to be called in basic mode (non [secure mode](https://developer.helpscout.com/beacon-2/web/secure-mode/)), i.e. without encrypted `signature`, by [@andrekovac](https://github.com/andrekovac) (see [#6](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/6))
 
 ### Changed
 
-- _Android_: Upgrade HelpScout Beacon SDK to version 2.3.1, by [@andrekovac](https://github.com/andrekovac)  (see [#6](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/6))
-
+- _Android_: Upgrade HelpScout Beacon SDK to version 2.3.1, by [@andrekovac](https://github.com/andrekovac) (see [#6](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/6))
 
 [unreleased]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.4.0...master
 [v0.4.0]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.3.0...v0.4.0
