@@ -6,6 +6,8 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
+## [v0.5.0] - 2022-11-03
+
 ### Fixed
 
 - Removed the use of jcenter for Android
@@ -34,6 +36,7 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 - _Android_: Upgrade HelpScout Beacon SDK to version 2.3.1, by [@andrekovac](https://github.com/andrekovac) (see [#6](https://github.com/Driversnote-Dev/react-native-helpscout-beacon/pull/6))
 
-[unreleased]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.4.0...master
+[unreleased]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.5.0...master
+[v0.5.0]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/Driversnote-Dev/react-native-helpscout-beacon/compare/v0.2.2...v0.3.0
