@@ -49,7 +49,7 @@ RCT_EXPORT_METHOD(identify:(NSString *)email nameParameter:(NSString *)name)
 
     // Store beaconUser locally
     beaconUser = user;
-    [HSBeacon login:user];
+    [HSBeacon identify:user];
 }
 
 RCT_EXPORT_METHOD(addAttributeWithKey:(NSString *)key valueParameter:(NSString *)value)
