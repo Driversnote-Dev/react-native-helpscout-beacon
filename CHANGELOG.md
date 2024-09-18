@@ -6,6 +6,15 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
+## [v0.6.0] - 2022-11-03
+
+### Changed
+
+- Android native SDK is updated to v. 5.1.2
+- iOS native SDK is updated to v. 3.0.1
+- `package.json` is now pointing to the right index and types file
+- Podspecs now include `Beacon` as dependency
+
 ## [v0.5.0] - 2022-11-03
 
 ### Fixed
