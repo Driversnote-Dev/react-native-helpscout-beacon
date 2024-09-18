@@ -16,12 +16,22 @@ This library is compatible with and supported for React Native `v0.60+`.
 
 ## Installation
 
-React Native `0.60` and above:
+1. Download package
 
-1. `$ yarn add react-native-helpscout-beacon`
-2. Add `pod 'Beacon'` to your `Podfile`
+```sh
+# npm
+npm react-native-helpscout-beacon
 
-For React Native `0.59` and below linking will be necessary (not tested): `$ react-native link react-native-helpscout-beacon`
+# yarn
+yarn add react-native-helpscout-beacon
+
+```
+
+2. Install pods (skip for expo projects)
+
+```
+cd ios && pod install
+```
 
 ## Update Helpscout SDK
 
