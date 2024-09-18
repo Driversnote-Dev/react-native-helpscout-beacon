@@ -20,7 +20,7 @@ This library is compatible with and supported for React Native `v0.60+`.
 
 ```sh
 # npm
-npm react-native-helpscout-beacon
+npm install react-native-helpscout-beacon
 
 # yarn
 yarn add react-native-helpscout-beacon
