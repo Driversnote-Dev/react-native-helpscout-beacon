@@ -6,22 +6,32 @@ Integrate the [Helpscout](https://www.helpscout.com/) Beacon into your React Nat
 
 - [**Android** SDK](https://developer.helpscout.com/beacon-2/android/)
 
-  Current version: [4.1.0](https://github.com/helpscout/beacon-android-sdk-sample/blob/main/CHANGELOG.md#version-410-2022-09-22) (released 2022-09-22)
+  Current version: [5.1.2](https://github.com/helpscout/beacon-android-sdk-sample/blob/main/CHANGELOG.md#version-512-2024-07-26) (released 2024-07-26)
 
 - [**iOS** SDK](https://developer.helpscout.com/beacon-2/ios/)
 
-  Tested version: [2.0.2](https://github.com/helpscout/beacon-ios-sdk/blob/master/CHANGELOG.md#202-september-16-2020) (released 2020-09-16)
+  Tested version: [3.0.1](https://github.com/helpscout/beacon-ios-sdk/releases/tag/3.0.1) (released 2024-04-25)
 
 This library is compatible with and supported for React Native `v0.60+`.
 
 ## Installation
 
-React Native `0.60` and above:
+1. Download package
 
-1. `$ yarn add react-native-helpscout-beacon`
-2. Add `pod 'Beacon'` to your `Podfile`
+```sh
+# npm
+npm install react-native-helpscout-beacon
 
-For React Native `0.59` and below linking will be necessary (not tested): `$ react-native link react-native-helpscout-beacon`
+# yarn
+yarn add react-native-helpscout-beacon
+
+```
+
+2. Install pods (skip for expo projects)
+
+```
+cd ios && pod install
+```
 
 ## Update Helpscout SDK
 

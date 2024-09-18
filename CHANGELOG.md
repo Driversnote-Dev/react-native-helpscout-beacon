@@ -6,6 +6,12 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
+### Changed
+
+- Android native SDK is updated to v. 5.1.2
+- iOS native SDK is updated to v. 3.0.1
+- Podspecs now include `Beacon` as dependency
+
 ## [v0.5.0] - 2022-11-03
 
 ### Fixed
