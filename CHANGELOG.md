@@ -6,8 +6,6 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
-## [v0.6.0] - 2024-09-18
-
 ### Changed
 
 - Android native SDK is updated to v. 5.1.2
