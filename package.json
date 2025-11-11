@@ -1,28 +1,32 @@
 {
   "name": "react-native-helpscout-beacon",
   "title": "React Native Helpscout Beacon",
-  "version": "0.7.0",
-  "description": "Integrate Helpscout Beacon in to your React Native app",
-  "main": "lib/index.js",
-  "types": "lib/types.d.ts",
-  "files": [
-    "react-native-helpscout-beacon.podspec",
-    "android/build.gradle",
-    "android/src",
-    "ios/",
-    "lib/**/*"
-  ],
+  "version": "0.7.1",
+  "description": "Expo Helpscout Beacon in to your React Native app",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "lint": "expo-module lint",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module",
+    "open:ios": "xed example/ios",
+    "open:android": "open -a \"Android Studio\" example/android"
   },
+  "keywords": [
+    "react-native",
+    "expo",
+    "expo-helpscout",
+    "ExpoHelpscout"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Driversnote-Dev/react-native-helpscout-beacon.git",
     "baseUrl": "https://github.com/Driversnote-Dev/react-native-helpscout-beacon"
   },
-  "keywords": [
-    "react-native"
-  ],
   "author": {
     "name": "Driversnote.com",
     "email": "ja@driversnote.com"
@@ -30,8 +34,20 @@
   "license": "MIT",
   "licenseFilename": "LICENSE",
   "readmeFilename": "README.md",
+  "bugs": {
+    "url": "http://www.google.com/issues"
+  },
+  "homepage": "http://www.google.com#readme",
+  "dependencies": {},
   "devDependencies": {
-    "@types/react-native": "^0.70.6",
-    "typescript": "^4.5.4"
+    "@types/react": "~19.1.0",
+    "expo-module-scripts": "^5.0.7",
+    "expo": "^54.0.18",
+    "react-native": "0.81.5"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
   }
 }
