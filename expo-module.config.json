@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["ExpoHelpscoutModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.helpscout.ExpoHelpscoutModule"]
+  }
+}
