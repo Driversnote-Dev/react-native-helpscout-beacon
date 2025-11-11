@@ -1,73 +1,42 @@
 import { useEvent } from 'expo';
-import ExpoHelpscout, { ExpoHelpscoutView } from 'expo-helpscout';
+import ExpoHelpscout from 'expo-helpscout';
+import { useEffect } from 'react';
 import { Button, SafeAreaView, ScrollView, Text, View } from 'react-native';
 
+const beaconId = "";
+const userEmail = "";
+const userName = "";
+
 export default function App() {
-  const onChangePayload = useEvent(ExpoHelpscout, 'onChange');
+
+ useEffect(() => {
+  ExpoHelpscout.init(beaconId);
+  ExpoHelpscout.identify(userEmail, userName);
+ })
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView style={styles.container}>
-        <Text style={styles.header}>Module API Example</Text>
-        <Group name="Constants">
-          <Text>{ExpoHelpscout.PI}</Text>
-        </Group>
-        <Group name="Functions">
-          <Text>{ExpoHelpscout.hello()}</Text>
-        </Group>
-        <Group name="Async functions">
-          <Button
-            title="Set value"
-            onPress={async () => {
-              await ExpoHelpscout.setValueAsync('Hello from JS!');
-            }}
-          />
-        </Group>
-        <Group name="Events">
-          <Text>{onChangePayload?.value}</Text>
-        </Group>
-        <Group name="Views">
-          <ExpoHelpscoutView
-            url="https://www.example.com"
-            onLoad={({ nativeEvent: { url } }) => console.log(`Loaded: ${url}`)}
-            style={styles.view}
-          />
-        </Group>
+        <Text style={styles.header}>Helpscout Example</Text>
+        <Button
+          title="Open Helpscout"
+          onPress={async () => {
+            await ExpoHelpscout.open();
+          }}
+        />
       </ScrollView>
     </SafeAreaView>
   );
 }
 
-function Group(props: { name: string; children: React.ReactNode }) {
-  return (
-    <View style={styles.group}>
-      <Text style={styles.groupHeader}>{props.name}</Text>
-      {props.children}
-    </View>
-  );
-}
 
 const styles = {
   header: {
     fontSize: 30,
     margin: 20,
   },
-  groupHeader: {
-    fontSize: 20,
-    marginBottom: 20,
-  },
-  group: {
-    margin: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    padding: 20,
-  },
   container: {
     flex: 1,
     backgroundColor: '#eee',
-  },
-  view: {
-    flex: 1,
-    height: 200,
   },
 };

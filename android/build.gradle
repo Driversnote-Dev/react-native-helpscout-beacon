@@ -30,6 +30,10 @@ if (useManagedAndroidSdkVersions) {
     }
   }
 }
+dependencies {
+  implementation "com.helpscout:beacon:6.0.1"
+}
+
 
 android {
   namespace "expo.modules.helpscout"

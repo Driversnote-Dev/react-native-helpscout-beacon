@@ -1,4 +1,5 @@
 import ExpoModulesCore
+import Beacon
 
 public class ExpoHelpscoutModule: Module {
   // Each module class must implement the definition function. The definition consists of components
@@ -10,39 +11,150 @@ public class ExpoHelpscoutModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoHelpscout')` in JavaScript.
     Name("ExpoHelpscout")
 
-    // Defines constant property on the module.
-    Constant("PI") {
-      Double.pi
+      var helpscoutBeaconID: String? = nil
+    var beaconUser: HSBeaconUser? = nil
+
+    Function("init") { (beaconID: String?) in
+      guard let beaconID = beaconID else {
+        print("[init] missing parameter: beaconID")
+        return
+      }
+      
+      helpscoutBeaconID = beaconID
     }
 
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
-    }
-
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { (value: String) in
-      // Send an event to JavaScript.
-      self.sendEvent("onChange", [
-        "value": value
-      ])
-    }
-
-    // Enables the module to be used as a native view. Definition components that are accepted as part of the
-    // view definition: Prop, Events.
-    View(ExpoHelpscoutView.self) {
-      // Defines a setter for the `url` prop.
-      Prop("url") { (view: ExpoHelpscoutView, url: URL) in
-        if view.webView.url != url {
-          view.webView.load(URLRequest(url: url))
-        }
+    Function("identify") { (email: String?, name: String?) in
+      guard let beaconID = helpscoutBeaconID else {
+        print("[identify] Not initialized - did you forget to call 'init'?")
+        return
       }
 
-      Events("onLoad")
+      guard let email = email else {
+        print("[identify] missing parameter: email")
+        return
+      }
+
+      let user = HSBeaconUser()
+      user.email = email
+      if let name = name {
+        user.name = name
+      }
+
+      beaconUser = user
+      HSBeacon.login(user)
+    }
+
+
+    Function("addAttributeWithKey") { (key: String?, value: String?) in
+      guard let beaconID = helpscoutBeaconID else {
+        print("[addAttributeWithKey] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      guard let user = beaconUser else {
+        print("[addAttributeWithKey] Not initialized - did you forget to call 'identify' or 'login'?")
+        return
+      }
+
+      guard let key = key, let value = value else {
+        print("[addAttributeWithKey] missing parameters")
+        return
+      }
+
+      user.addAttribute(withKey: key, value: value)
+    }
+
+    Function("open") { (signatureKey: String?) in
+      guard let beaconID = helpscoutBeaconID else {
+        print("[open] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      guard let _ = beaconUser else {
+        print("[open] Not initialized - did you forget to call 'identify' or 'login'?")
+        return
+      }
+
+      let settings = HSBeaconSettings(beaconId: beaconID)
+      DispatchQueue.main.async {
+        if let signature = signatureKey {
+          HSBeacon.open(settings, signature: signature)
+        } else {
+          HSBeacon.open(settings)
+        }
+      }
+    }
+
+
+    Function("navigate") { (path: String?) in
+      guard let beaconID = helpscoutBeaconID else {
+        print("[navigate] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      guard let path = path else {
+        print("[navigate] missing parameter: path")
+        return
+      }
+
+      let settings = HSBeaconSettings(beaconId: beaconID)
+      DispatchQueue.main.async {
+        HSBeacon.navigate(path, beaconSettings: settings)
+      }
+
+    // MARK: - logout()
+    Function("logout") {
+      guard let _ = helpscoutBeaconID else {
+        print("[logout] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      HSBeacon.logout()
+    }
+
+    // MARK: - openArticle(articleID, signature)
+    Function("openArticle") { (articleID: String?, signature: String?) in
+      guard let beaconID = helpscoutBeaconID else {
+        print("[openArticle] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      guard let articleID = articleID else {
+        print("[openArticle] missing parameter: articleID")
+        return
+      }
+
+      let settings = HSBeaconSettings(beaconId: beaconID)
+      DispatchQueue.main.async {
+        if let signature = signature {
+          HSBeacon.openArticle(articleID, beaconSettings: settings, signature: signature)
+        } else {
+          HSBeacon.openArticle(articleID, beaconSettings: settings)
+        }
+      }
+    }
+
+    Function("suggestArticles") { (articleIDList: [String]?) in
+      guard let _ = helpscoutBeaconID else {
+        print("[suggestArticles] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      guard let ids = articleIDList else {
+        print("[suggestArticles] missing parameter: articleIDList")
+        return
+      }
+
+      HSBeacon.suggest(ids)
+    }
+
+    Function("resetSuggestions") {
+      guard let _ = helpscoutBeaconID else {
+        print("[resetSuggestions] Not initialized - did you forget to call 'init'?")
+        return
+      }
+
+      HSBeacon.suggest([])
     }
   }
-}
+}}

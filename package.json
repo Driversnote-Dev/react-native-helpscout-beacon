@@ -1,7 +1,8 @@
 {
-  "name": "expo-helpscout",
-  "version": "0.1.0",
-  "description": "My new module",
+  "name": "react-native-helpscout-beacon",
+  "title": "React Native Helpscout Beacon",
+  "version": "0.7.1",
+  "description": "Expo Helpscout Beacon in to your React Native app",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
