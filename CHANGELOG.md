@@ -6,6 +6,12 @@ _The format is based on [Keep a Changelog](http://keepachangelog.com/) and this 
 
 ## [unreleased]
 
+## [v0.7.0] - 2025-11-05
+
+### Changed
+
+- Android native SDK is updated to v. 6.0.1
+
 ## [v0.6.0] - 2024-09-23
 
 ### Changed

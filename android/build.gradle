@@ -10,10 +10,10 @@
 //   original location:
 //   - https://github.com/facebook/react-native/blob/0.58-stable/local-cli/templates/HelloWorld/android/app/build.gradle
 
-def DEFAULT_COMPILE_SDK_VERSION = 35
-def DEFAULT_BUILD_TOOLS_VERSION = '35.0.0'
 def DEFAULT_MIN_SDK_VERSION = 21
 def DEFAULT_TARGET_SDK_VERSION = 35
+def DEFAULT_COMPILE_SDK_VERSION = 35
+def DEFAULT_BUILD_TOOLS_VERSION = '35.0.0'
 
 def safeExtGet(prop, fallback) {
     rootProject.ext.has(prop) ? rootProject.ext.get(prop) : fallback
@@ -30,9 +30,10 @@ buildscript {
     if (project == rootProject) {
         repositories {
             google()
+            mavenCentral()
         }
         dependencies {
-            classpath 'com.android.tools.build:gradle:3.4.1'
+            classpath 'com.android.tools.build:gradle:4.2.2'
         }
     }
 }
@@ -50,12 +51,13 @@ android {
         abortOnError false
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
 }
 
 repositories {
+    mavenCentral()
     // ref: https://www.baeldung.com/maven-local-repository
     mavenLocal()
     maven {
@@ -67,7 +69,6 @@ repositories {
         url "$rootDir/../node_modules/jsc-android/dist"
     }
     google()
-    mavenCentral()
 }
 
 dependencies {
